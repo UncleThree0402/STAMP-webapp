@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Budget
+{% endblock %}
+
+{% block main %}
+
+<div class="row">
+<div class="col-xl-12">
+<div calss='card shadow mb-4'>
+    <div class="card-header">Budget</div>
+    <div class="card-body ">
+        <form action="/budget" method="post"  class="needs-validation well"  novalidate>
+                <div class="form-group">
+                    <label class="form-check-label" for="budget">Budget Input</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend">$</span>
+                        </div>
+                        <input autocomplete="off" type="text" class="form-control"  placeholder="Budget Amount" name = "budget" required>
+                        <div class="invalid-feedback">
+                            Please provide Amount.
+                        </div>
+                    </div>
+                </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+</div>
+</div>
+</div>
+
+
+
+<div class="row">
+<div class="col-xl-12">
+<div calss='card shadow mb-4'>
+    <div class="card-header">Alerts Amount</div>
+    <div class="card-body ">
+        <form action="/alert" method="post"  class="needs-validation well"  novalidate>
+                <div class="form-group">
+                    <label class="form-check-label" for="caseid">Alert Amount Input</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend">$</span>
+                        </div>
+                        <input autocomplete="off" type="text" class="form-control"  placeholder="Alert Amount" name = "alert" required>
+                        <div class="invalid-feedback">
+                            Please provide Alert Amount.
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+
+
+
+<script>
+    (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+    form.addEventListener('submit', function(event) {
+    if (form.checkValidity() === false) {
+    event.preventDefault();
+    event.stopPropagation();
+    }
+    form.classList.add('was-validated');
+    }, false);
+    });
+    }, false);
+    })();
+</script>
+
+{% endblock %}

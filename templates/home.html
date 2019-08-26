@@ -1,0 +1,213 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<div class="row">
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Expenses</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${{ expenes }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Income</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${{ income }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Budget</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${{ budget }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">NET AMOUNT</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${{ total }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Income</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="Income" width="576" height="367" class="chartjs-render-monitor" style="display: block; height: 245px; width: 384px;"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Expenses</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="Expenses" width="576" height="367" class="chartjs-render-monitor" style="display: block; height: 245px; width: 384px;"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Status</h6>
+            </div>
+            <div class="card-body">
+                <p><h12 class="m-0 font-weight-bold text-{{ wordtype1 }}">{{ word1 }}</h12></p>
+                <p><h12 class="m-0 font-weight-bold text-{{ wordtype2 }}">{{ word2 }}</h12></p>
+                <p><h12 class="m-0 font-weight-bold text-{{ wordtype3 }}">{{ word3 }}</h12></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<script>
+var ctx = document.getElementById('Income');
+var Income = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Salary', 'Gift', 'Credit', 'Other'],
+        datasets: [{
+            label: '# of Votes',
+            data: [{{ salary }},{{ gift }},{{ credit }},{{ Iother }}],
+            backgroundColor: [
+                'rgba(60, 60, 168, 1)',
+                'rgba(112, 59, 165, 1)',
+                'rgba(165, 59, 165, 1)',
+                'rgba(224, 29, 126, 1)'
+            ],
+            borderColor: [
+                'rgba(60, 60, 168, 1)',
+                'rgba(112, 59, 165, 1)',
+                'rgba(165, 59, 165, 1)',
+                'rgba(224, 29, 126, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        legend:
+        {
+            position:'bottom',
+            labels:{
+                fontSize:15,
+                boxWidth: 15,
+                padding: 15
+            }
+
+        }
+    }
+});
+</script>
+
+<script>
+var ctx = document.getElementById('Expenses');
+var Expenses = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Food', 'Transportation', 'Daily Supplies', 'Social', 'Entertainment', 'Snack','Clothes','Rent','Medical','Other'],
+        datasets: [{
+            label: '# of Votes',
+            data: [{{ food }},{{ transportation }},{{ daily }},{{ social }},{{ enter }},{{ snack }},{{ clothes }},{{ rent }},{{ medical }},{{ Eother }}],
+            backgroundColor: [
+                'rgba(60, 60, 168, 1)',
+                'rgba(112, 59, 165, 1)',
+                'rgba(165, 59, 165, 1)',
+                'rgba(224, 29, 126, 1)',
+                'rgba(224, 29, 29, 1)',
+                'rgba(224, 126, 29, 1)',
+                'rgba(239, 239, 11, 1)',
+                'rgba(104, 158, 50, 1)',
+                'rgba(105, 130, 130, 1)',
+                'rgb(142, 82, 142)'
+
+            ],
+            borderColor: [
+                'rgba(60, 60, 168, 1)',
+                'rgba(112, 59, 165, 1)',
+                'rgba(165, 59, 165, 1)',
+                'rgba(224, 29, 126, 1)',
+                'rgba(224, 29, 29, 1)',
+                'rgba(224, 126, 29, 1)',
+                'rgba(239, 239, 11, 1)',
+                'rgba(104, 158, 50, 1)',
+                'rgba(105, 130, 130, 1)',
+                'rgb(142, 82, 142)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        legend:
+        {
+            position:'bottom',
+            labels:{
+                fontSize:15,
+                boxWidth: 15,
+                padding: 15
+            }
+
+        }
+    }
+});
+</script>
+
+{% endblock %}

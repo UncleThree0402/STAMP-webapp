@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete
+{% endblock %}
+
+{% block main %}
+<div calss='card'>
+    <div class="card-header">Delete</div>
+    <div class="card-body ">
+        <form action="/delete" method="post"  class="needs-validation well"  novalidate>
+                <div class="form-group">
+                    <label class="form-check-label" for="caseid">CaseID Input</label>
+                    <div class="input-group">
+                        <input autocomplete="off" type="text" class="form-control"  placeholder="CaseID" name = "caseid" required>
+                        <div class="invalid-feedback">
+                            Please provide CaseID.
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+</div>
+<script>
+    (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+    form.addEventListener('submit', function(event) {
+    if (form.checkValidity() === false) {
+    event.preventDefault();
+    event.stopPropagation();
+    }
+    form.classList.add('was-validated');
+    }, false);
+    });
+    }, false);
+    })();
+</script>
+
+{% endblock %}

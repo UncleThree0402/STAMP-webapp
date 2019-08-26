@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+<div class = "card">
+    <div class="card-header">History</div>
+    <div class="card-body ">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>CaseID</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row["caseid"] }}</td>
+                    <td>{{ row["ei"] }}</td>
+                    <td>{{ row["type"] }}</td>
+                    <td>${{ row["amount"] }}</td>
+                    <td>{{ row["time"] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
